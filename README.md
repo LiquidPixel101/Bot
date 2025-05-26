@@ -1,7 +1,8 @@
 ![](botpfp.jpg)
 
-# Bot
-
+# Bot (beta)
+This is not the official version of @bot! I am a major contributor to @bot -- but nonetheless this version is very buggy.
+<br>
 ## About
 Bot is a discourse bot that responds automatically to pings. It automates access to the discourse and was taken inspiration from discobot, a bot native to discourse. It is made in python selenium, using chromedriver. <br>
 There is a bot currently being hosted on replit for the X-Camp Discourse.
@@ -29,6 +30,12 @@ Bot can also only reply to topics in categories that the bot is in. It cannot re
 `@bot xkcd [ID HERE]` or `@bot xkcd comic [ID HERE]`: This will give you the xkcd comic with the ID given along with some info on the comic.
 <br><br>
 `@bot run [python/c++]\n[CODE]`: Runs the given Python/C++ code. STILL VERY BUGGY. All credits to [ethandacat](https://github.com/ethandacat) for basically making this for me!
+<br><br>
+`@bot fortune`: Gives a fortune.
+<br><br>
+`@bot user [USERNAME]`: Get information about a user.
+<br><br>
+`@bot version`: Retrieve the version, its data, and the changelog.
 ### Other
 **NO COMMAND:** If no recognizable command is detected, then the bot will output one of the following at random:
 * Hi!
@@ -48,8 +55,6 @@ Bot can also only reply to topics in categories that the bot is in. It cannot re
 ## Anticipated Features:
 The following features may or may not come out in the future. Stay tuned!
 * Changelog and version control command
-* A command which the bot will give you all the information of an account on the forum given the username.
-* A "fortune" command that outputs a random Magic 8 Ball response. In honor, discobot.
 * More documentation (here)
 
 ## Credits:
@@ -65,6 +70,15 @@ Also go check out [ethandacat](https://github.com/ethandacat)'s [catscobot](http
 
 ## Changelog:
 ```
+May 25, 2025
+Beta 2.1.1: Added version command
+
+May 25, 2025
+Beta 2.1: Added fortune and user commands.
+
+May 25, 2025
+Dump: Updated official repo to this one
+
 May 25,2025
 Version 2.0.1: Minor bug fixes to `@bot run`
 

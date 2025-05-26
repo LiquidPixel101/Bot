@@ -502,10 +502,10 @@ while True:
         if chatpm:
             topic_content.send_keys(f"**[AUTOMATED]**")
             topic_content.send_keys(Keys.ENTER)
-            topic_content.send_keys(f"I did not get your message. This could be because you deleted your post before I could read it.")
+            topic_content.send_keys(f"I did not get your message. This could be because you mentioned @all.")
             topic_content.send_keys(Keys.ENTER)
         else:
-            topiccontent=f"**[AUTOMATED]** \n\nI did not get your message. This could be because you mentioned `@all`.\n\n<font size={x}>"
+            topiccontent = f"**[AUTOMATED]**\n\nI did not get your message. This could be because you deleted your post before I could read it.<font size={x}>"
     if (command == ""):
         response = random.randint(0, 3)
         x = random.randint(1, 1000000)
@@ -622,6 +622,113 @@ while True:
                 else:
                     topiccontent=f"**[AUTOMATED]** \nPlease enter the command in the format of:\n```@bot run [python/c++]\n[CODE]``` \n\n<font size={x}>"
             #topiccontent=f"**[AUTOMATED]** \n{run_code("
+        elif command[0] == "fortune":
+            fortunes = [
+                "Reply hazy, try again",
+                "Better not tell you now",
+                "Outlook good",
+                "It is certain",
+                "Signs point to yes",
+                "You may rely on it",
+                "As I see it, yes",
+                "It is decidedly so",
+                "My sources say no",
+                "Very doubtful",
+                "Cannot predict now",
+                "My reply is no",
+                "Yes",
+                "Yes definitely",
+                "Ask again later",
+                "Concentrate and ask again",
+                "Most likely",
+                "Don't count on it",
+                "Without a doubt",
+                "Outlook not so good",
+                ":moai:"
+            ]
+            fortune = random.choice(fortunes)
+            if chatpm:
+                topic_content.send_keys("**[AUTOMATED]**")
+                topic_content.send_keys(Keys.ENTER)
+                topic_content.send_keys(f"> :crystal_ball: {fortune}")
+            else:
+                topiccontent = f"**[AUTOMATED]**\n\n> :crystal_ball: {fortune}"
+        elif command[0] == "user":
+            if len(command)<2:
+                if chatpm:
+                    topic_content.send_keys("**[AUTOMATED]**")
+                    topic_content.send_keys(Keys.ENTER)
+                    topic_content.send_keys("Please enter a valid user!")
+                else:
+                    topiccontent = "**[AUTOMATED]**\n\nPlease enter a valid user!"
+            else:
+                csrfres = reqs.get(f'https://x-camp.discourse.group/session/csrf.json')
+                if csrfres.status_code != 200:
+                    print('Failed to fetch CSRF token:', csrfres.status_code)
+                    print(csrfres.text)
+                    exit()
+                csrf = csrfres.json()["csrf"]
+                reqs.headers.update({
+                    'X-CSRF-Token': csrf,
+                    'Content-Type': 'application/json',
+                    'Referer': f'https://x-camp.discourse.group/t/17686/'
+                })
+                freq = reqs.get(f"https://x-camp.discourse.group/u/{command[1]}.json")
+                if freq.status_code != 200:
+                    if chatpm:
+                        topic_content.send_keys("**[AUTOMATED]**")
+                        topic_content.send_keys(Keys.ENTER)
+                        topic_content.send_keys("There was an error with your request - perhaps that user doesn't exist?")
+                    else:
+                        topiccontent = "**[AUTOMATED]**\n\nThere was an error with your request - perhaps that user doesn't exist?"
+                else:
+                    userstat = freq.json()
+                    usr = userstat['user']
+                    if chatpm:
+                        topic_content.send_keys("**[AUTOMATED]**")
+                        topic_content.send_keys(Keys.ENTER)
+                        topic_content.send_keys("`@bot user` is not supported in chat. Sorry!")
+                    else:
+                        topiccontent = f"""
+**[AUTOMATED]**
+
+## {usr["name"]}
+**Username**: {command[1]}
+**Trust Level**: {['New User','Basic','Member','Regular','Leader'][int(usr['trust_level'])]}
+**Birthday**: {usr['birthdate']}
+**Solutions**: {usr['accepted_answers']}
+**Cheers**: {usr['gamification_score']}
+**Is admin**: {usr['admin']}
+**Is mod**: {usr['mod']}
+**Title**: {usr['title']}
+**Timezone**: {usr['timezone']}
+**Featured topic**: https://x-camp.discourse.group/t/{usr['featured_topic']['slug']}
+**Badges**: {usr['badge_count']}
+
+> **DID YOU KNOW**: {command[1]} is the {usr['id']}th user to join the Discourse!
+                        """
+        elif command[0] == "version":
+            readme = reqs.get("https://raw.githubusercontent.com/LiquidPixel101/Bot/refs/heads/main/README.md")
+            if readme.status_code != 200:
+                if chatpm:
+                    topic_content.send_keys("**[AUTOMATED]**")
+                    topic_content.send_keys(Keys.ENTER)
+                    topic_content.send_keys("Could not get version.")
+                else:
+                    topiccontent = "**[AUTOMATED]**\n\nCould not get version."
+            else:
+                changelog = readme.text.split("## Changelog:")[1]
+                interim = changelog.split("Version ")[1].split(":")
+                currentver = interim[0]
+                description = interim[1].split("\n")[0]
+                if chatpm:
+                    topic_content.send_keys("**[AUTOMATED]**")
+                    topic_content.send_keys(Keys.ENTER)
+                    topic_content.send_keys("**Current Version**: "+currentver)
+                    topic_content.send_keys(Keys.ENTER)
+                    topic_content.send_keys(description)
+                else:
+                    topiccontent = f"**[AUTOMATED]**\n\n**Current Version**:{currentver}\n{description}\n\n**Changelog**:\n{changelog}"
         elif command[0] == "xkcd":
             lasturl = "https://xkcd.com/info.0.json"
             lastresponse = requests.get(lasturl)
