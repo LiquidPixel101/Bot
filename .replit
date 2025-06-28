@@ -3,7 +3,6 @@ modules = ["python-3.11"]
 
 [nix]
 channel = "stable-24_05"
-packages = ["geckodriver"]
 
 [unitTest]
 language = "python3"
@@ -14,14 +13,3 @@ requiredFiles = [".replit", "replit.nix"]
 [deployment]
 run = ["python3", "main.py"]
 deploymentTarget = "gce"
-
-[[ports]]
-localPort = 8000
-externalPort = 8000
-
-[[ports]]
-localPort = 8080
-externalPort = 80
-
-[[ports]]
-localPort = 9222
