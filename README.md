@@ -74,6 +74,9 @@ Assistance and help: ChatGPT, DeepSeek, Gemini, [ethandacat](https://github.com/
 Also go check out [ethandacat](https://github.com/ethandacat)'s [catscobot](https://github.com/ethandacat/catscobott)!
 ## Changelog:
 ```
+June 28, 2025
+Version 2.1.4: Security fixed for `@bot run`, including a last line of defense. Bug fixes.
+
 June 21, 2025
 Version 2.1.3: Added `@bot support`, bug fixes
 

@@ -21,6 +21,8 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as ec
 from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.options import Options
 
 genai.configure(api_key=os.environ['GOOGLE_AI_API_KEY'])
 model = genai.GenerativeModel(
@@ -226,7 +228,10 @@ def run_code_python(code, queue):
     try:
         banned=[]
         ecode=re.sub(r'\s+', '', code.lower())
+        
         ban = [
+            "environ",
+            "env",
             "exec",                   # exec(...)
             "eval(",                  # eval(...)
             "compile(",               # compile(...)
@@ -464,10 +469,48 @@ def run_code_python(code, queue):
             return
         finally:
             sys.stdout = sys.__stdout__
-
-        queue.put(
-            f"### Execution completed successfully.\nLanguage: Python\n\n**Output:**\n```txt\n{output.getvalue()}```"
-        )
+        reqqs = requests.Session()
+        for cookie in browser.get_cookies():
+            reqqs.cookies.set(cookie['name'], cookie['value'])
+        if perm:
+            peopledata=reqqs.get(f"https://x-camp.discourse.group/t/{topicid}.json").json()
+            usernames = [prpt["username"] for prpt in peopledata["details"]["allowed_users"]]
+        mein=False
+        forum_url="https://x-camp.discourse.group"
+        if perm and db['me'] in usernames:
+            mein=True
+        if email in output.getvalue() or password in output.getvalue() or os.environ['GOOGLE_AI_API_KEY'] in output.getvalue():
+            if not mein:
+                csrf_resp = reqqs.get(f'{forum_url}/session/csrf.json')
+                csrf_token = csrf_resp.json().get('csrf')
+                reqqs.headers.update({
+                    'X-CSRF-Token': csrf_token,
+                    'Content-Type': 'application/json',
+                })
+                contents="This code has been used to exploit:\n```\n"+code+"\n```"
+                if db['me']==user:
+                    payload = {
+                        "title": f"Support Ticket [URGENT SECURITY ISSUE] #{db['support']}",
+                        "raw": "**[AUTOMATED]**\n"+contents+f"\n<font size={x+1}>",
+                        "archetype": "private_message",
+                        "target_recipients": f"{db['me']}"
+                    }
+                else:
+                    payload = {
+                        "title": f"Support Ticket [URGENT SECURITY ISSUE] #{db['support']}",
+                        "raw": "**[AUTOMATED]**\n"+contents+f"\n<font size={x+1}>",
+                        "archetype": "private_message",
+                        "target_recipients": f"{db['me']},{user}"
+                    }
+                reqqs.post(f'{forum_url}/posts.json', json=payload)
+                db['support']+=1
+            if perm==True:
+                queue.put(f"### OOF, you successfully exploited the bot.\nNote: This is the last line of defense before revealing confidential information. If you receive this message, congratulations, you found a major security issue in bot!\n\nP.S. Thankfully you tried exploiting in a PM, so you good :)")
+            else:
+                queue.put(f"### OOF, you successfully exploited the bot.\nNote: This is the last line of defense before revealing confidential information. If you receive this message, congratulations, you found a major security issue in bot!\n\nP.S. You did not try exploiting in a PM, meaning you could've revealed very sensitive information. You bad bad.\n")
+            time.sleep(5)
+        
+        queue.put(f"### Execution completed successfully.\nLanguage: Python\n\n**Output:**\n```txt\n{output.getvalue()}```")
 
     except BaseException:
         queue.put(f"### Critical error:\n```txt\n{traceback.format_exc()}```")
@@ -779,7 +822,47 @@ def run_code_cpp(code, queue):
         if execution_process.returncode != 0:
             queue.put(f"### Error: Program exited with code {execution_process.returncode}\n```txt\n{stdout}```")
             return
-
+        reqqs = requests.Session()
+        for cookie in browser.get_cookies():
+            reqqs.cookies.set(cookie['name'], cookie['value'])
+        if perm:
+            peopledata=reqqs.get(f"https://x-camp.discourse.group/t/{topicid}.json").json()
+            usernames = [prpt["username"] for prpt in peopledata["details"]["allowed_users"]]
+        mein=False
+        forum_url="https://x-camp.discourse.group"
+        if perm and db['me'] in usernames:
+            mein=True
+        if email in stdout or password in stdout or os.environ['GOOGLE_AI_API_KEY'] in stdout:
+            if not mein:
+                csrf_resp = reqqs.get(f'{forum_url}/session/csrf.json')
+                csrf_token = csrf_resp.json().get('csrf')
+                reqqs.headers.update({
+                    'X-CSRF-Token': csrf_token,
+                    'Content-Type': 'application/json',
+                })
+                contents="This code has been used to exploit:\n```\n"+code+"\n```"
+                if db['me']==user:
+                    payload = {
+                        "title": f"Support Ticket [URGENT SECURITY ISSUE] #{db['support']}",
+                        "raw": "**[AUTOMATED]**\n"+contents+f"\n<font size={x+1}>",
+                        "archetype": "private_message",
+                        "target_recipients": f"{db['me']}"
+                    }
+                else:
+                    payload = {
+                        "title": f"Support Ticket [URGENT SECURITY ISSUE] #{db['support']}",
+                        "raw": "**[AUTOMATED]**\n"+contents+f"\n<font size={x+1}>",
+                        "archetype": "private_message",
+                        "target_recipients": f"{db['me']},{user}"
+                    }
+                reqqs.post(f'{forum_url}/posts.json', json=payload)
+                db['support']+=1
+            if perm==True:
+                queue.put(f"### OOF, you successfully exploited the bot.\nNote: This is the last line of defense before revealing confidential information. If you receive this message, congratulations, you found a major security issue in bot!\n\nP.S. Thankfully you tried exploiting in a PM, so you good :)")
+            else:
+                queue.put(f"### OOF, you successfully exploited the bot.\nNote: This is the last line of defense before revealing confidential information. If you receive this message, congratulations, you found a major security issue in bot!\n\nP.S. You did not try exploiting in a PM, meaning you could've revealed very sensitive information. You bad bad.\n")
+            time.sleep(5)
+            
         queue.put(f"### Execution completed successfully.\nLanguage: C++\n\n**Output:**\n```txt\n{stdout}\n```")
     except subprocess.TimeoutExpired:
         queue.put(
@@ -871,8 +954,7 @@ options.add_argument('--disable-extensions')
 options.add_argument('--start-maximized')
 email = os.environ['EMAIL']
 password = os.environ['PASSWORD']
-
-#chromedriver_path = "/nix/store/3qnxr5x6gw3k9a9i7d0akz0m6bksbwff-chromedriver-125.0.6422.141/bin/chromedriver"
+#chromedriver_path = "/nix/store/zi4f80l169xlmivz8vja8wlphq74qqk0-chromium-125.0.6422.141/bin/chromium"
 #service = Service(chromedriver_path)
 browser = webdriver.Chrome(options=options)
 browser.get('https://x-camp.discourse.group/')
@@ -1758,7 +1840,9 @@ while True:
                 topiccontent = defaultresponse(response, chatpm)
     if not chatpm:
         print(topiccontent)
+        #print("seriously I GOT HERE")
         csrfres = reqs.get('https://x-camp.discourse.group/session/csrf.json')
+        #print("NO WAY I SURVIVED")
         if csrfres.status_code != 200:
             print('Failed to fetch CSRF token:', csrfres.status_code)
             print(csrfres.text)
