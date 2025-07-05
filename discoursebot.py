@@ -1245,7 +1245,7 @@ while True:
                 id = userdata["user"]["id"] 
                 autom=False
                 if id<=0:
-                    id="This account was created automatically when this discourse was made."
+                    id=f"User ID is negative (value: {id}), indicating the account was created automatically. Join position cannot be determined because join order is based on user ID."
                     autom=True
                 displayname = userdata["user"]["name"]
                
