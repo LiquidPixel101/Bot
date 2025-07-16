@@ -74,8 +74,11 @@ Assistance and help: ChatGPT, DeepSeek, Gemini, [ethandacat](https://github.com/
 Also go check out [ethandacat](https://github.com/ethandacat)'s [catscobot](https://github.com/ethandacat/catscobott)!
 ## Changelog:
 ```
+July 15, 2025
+Version 2.1.5: Google SDK upgrade to the most recent version, actually replying to your post.
+
 June 28, 2025
-Version 2.1.4: Security fixed for `@bot run`, including a last line of defense. Bug fixes.
+Version 2.1.4: Security fixeS for `@bot run`, including a last line of defense. Bug fixes.
 
 June 21, 2025
 Version 2.1.3: Added `@bot support`, bug fixes
