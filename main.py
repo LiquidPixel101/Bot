@@ -47,6 +47,7 @@ def run_discourse_bot():
 
 if __name__ == "__main__":
     db["version"]="2.1.5"
+    print(db["notifs"])
     flask_thread = Thread(target=run_flask)
     flask_thread.daemon = True
     flask_thread.start()

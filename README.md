@@ -60,6 +60,9 @@ Bot can also only reply to topics in categories that the bot is in. It cannot re
 ## Anticipated Features:
 The following features may or may not come out in the future. Stay tuned!
 * Autocorrect: An AI decides if there may be a typo in your command and automatically fixes it.
+* @bot image: Uses AI to generate an image.
+* Using AI to scan images
+* Self-Destruct: Self destructs. Only restricted people can do this.
 * More documentation (here)
 
 ## Credits:
