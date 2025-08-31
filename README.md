@@ -14,7 +14,9 @@ Bot can also only reply to topics in categories that the bot is in. It cannot re
 ### Commands:
 `@bot display help` or `@bot help`: Makes the bot output the various commands it can do and a short explanation of them.
 <br><br>
-`@bot ai [PROMPT HERE]`: This will generate an AI response based on the prompt. Currently, I am using Gemini-2.0-Flash Experimental. 
+`@bot ai [PROMPT HERE]`: This will generate an AI response based on the prompt. Currently, I am using Gemini-2.5-Flash. Can also analyze messages.
+<br><br>
+`@bot image [PROMPT]` or `@bot generate [PROMPT]` or `@bot ai generate [PROMPT]`: Generates/edits a image based on the prompt given.
 <br><br>
 `@bot user [USER]`: Gives all the information of the user requested. If the user is left blank, it will give all the information of you.
 <br><br>
@@ -40,6 +42,8 @@ Bot can also only reply to topics in categories that the bot is in. It cannot re
 <br><br>
 `@bot xkcd [ID HERE]` or `@bot xkcd comic [ID HERE]`: This will give you the xkcd comic with the ID given along with some info on the comic.
 <br><br>
+`@bot shutdown` or `@bot sd`: Shuts down the bot totally, failsafe won't save.
+<br><br>
 `@bot run [python/c++]\n[CODE]`: (only works in topics) Runs the given Python/C++ code. STILL VERY BUGGY. All credits to [ethandacat](https://github.com/ethandacat) for basically making this for me!
 ### Other
 **NO COMMAND:** If no recognizable command is detected, then the bot will output one of the following at random:
@@ -61,6 +65,7 @@ Bot can also only reply to topics in categories that the bot is in. It cannot re
 The following features may or may not come out in the future. Stay tuned!
 * Autocorrect: An AI decides if there may be a typo in your command and automatically fixes it.
 * @bot image: Uses AI to generate an image.
+* @bot now: Displays the current time and date.
 * Using AI to scan images
 * Self-Destruct: Self destructs. Only restricted people can do this.
 * More documentation (here)
@@ -77,6 +82,15 @@ Assistance and help: ChatGPT, DeepSeek, Gemini, [ethandacat](https://github.com/
 Also go check out [ethandacat](https://github.com/ethandacat)'s [catscobot](https://github.com/ethandacat/catscobott)!
 ## Changelog:
 ```
+August 29, 2025
+Version 2.2.1: Quota reach protection.
+
+August 29, 2025
+Version 2.2.0: Added image to image, text to image, image to text.
+
+August 28, 2025
+Version 2.1.6: Bug fixes and minor tweaks in the code
+
 July 15, 2025
 Version 2.1.5: Google SDK upgrade to the most recent version, actually replying to your post.
 

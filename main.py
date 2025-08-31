@@ -27,27 +27,37 @@ def health_check():
 def run_flask():
     # Run Flask on the port specified by Replit (default 8000)
     port = int(os.getenv("PORT", 8000))
-    app.run(host='0.0.0.0', port=port)
+    app.run(host='0.0.0.0', port=port, debug=True, use_reloader=False)
 
 def run_discourse_bot():
     while True:
         try:
-            # Update to correct filename: discoursebot (2).py
-            subprocess.run(["python", "discoursebot.py"], check=True)
-        except subprocess.CalledProcessError as e:
-            print("\nAn error occurred while running discoursebot (2).py:")
-            print(f"Return Code: {e.returncode}")
-            print(f"Command: {e.cmd}")
-            print(f"Output: {e.output}")
-            print(f"Error: {e.stderr}")
-        except Exception as e:
+            result = subprocess.run(["python", "discoursebot.py"], text=True, check=False)
+
+            if result.returncode == 42:
+                print("Shutdown sequence complete.")
+                break  # stop restarting
+
+            if result.returncode != 0:
+                print("\nAn error occurred while running discoursebot.py:")
+                print(f"Return Code: {result.returncode}")
+                print(f"Command: {result.args}")
+                print(f"Output: {result.stdout}")
+                print(f"Error: {result.stderr}")
+                time.sleep(0.5)
+                continue
+
+            print("Bot exited cleanly. Stopping.")
+            break
+
+        except Exception:
             print("\nAn unexpected error occurred:")
             print(traceback.format_exc())
-        time.sleep(0.5)
+            time.sleep(0.5)
+
 
 if __name__ == "__main__":
-    db["version"]="2.1.5"
-    print(db["notifs"])
+    db["version"]="2.2.1"
     flask_thread = Thread(target=run_flask)
     flask_thread.daemon = True
     flask_thread.start()
