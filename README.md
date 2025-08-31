@@ -83,7 +83,7 @@ Also go check out [ethandacat](https://github.com/ethandacat)'s [catscobot](http
 ## Changelog:
 ```
 August 29, 2025
-Version 2.2.1: Quota reach protection.
+Version 2.2.1: Quota reach protection. Bug fixes
 
 August 29, 2025
 Version 2.2.0: Added image to image, text to image, image to text.

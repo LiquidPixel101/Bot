@@ -478,7 +478,9 @@ def run_code_python(code, queue):
             ".f_globals",
             ".f_locals"
         ]
-
+        # NOTE TO EXPLOITERS AHHHHH NOTE TO EXPLOITERS
+        # A SECRET HAS BEEN NAMED "FLAG" SO TRY TO EXPLOIT THE FLAG
+        # SO YEAH (the ultimate test also doesnt check for the flag)
         hasin = False
         cstrip = re.sub(r'\s+', '', ecode.lower())
         banned = [b for b in ban if b in cstrip]
