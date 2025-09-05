@@ -1139,7 +1139,7 @@ while True:
     else:  #--------------------------------------------------------
         print(command)
         command = command.split()
-        response = random.randint(0, 3)
+        default_response_code = random.randint(0, 3)
 
         x = random.randint(1, 1000000)
         if command[0].lower() == "say" and len(command) >= 2:
@@ -1587,6 +1587,7 @@ while True:
             print("this is the imagenum", imagenum)
             leimages = [Image.open(f"image_{i}.jpg") for i in range(1, imagenum + 1)]
             quotareached=False
+            response = None
             try:
                 response = client.models.generate_content(
                     model="gemini-2.0-flash-preview-image-generation",
@@ -1697,6 +1698,7 @@ while True:
                 print("this is the imagenum", imagenum)
                 leimages = [Image.open(f"image_{i}.jpg") for i in range(1, imagenum + 1)]
                 quotareached=False
+                response = None
                 try:
                     response = client.models.generate_content(
                         model="gemini-2.0-flash-preview-image-generation",
@@ -2163,9 +2165,9 @@ while True:
                         )
         else:
             if chatpm:
-                defaultresponse(response, chatpm)
+                defaultresponse(default_response_code, chatpm)
             else:
-                topiccontent = defaultresponse(response, chatpm)
+                topiccontent = defaultresponse(default_response_code, chatpm)
     if not chatpm:
         print(topiccontent)
         #print("seriously I GOT HERE")
