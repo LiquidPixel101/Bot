@@ -1,0 +1,41 @@
+entrypoint = "main.py"
+
+modules = ["python-3.11"]
+
+[nix]
+channel = "stable-24_05"
+packages = ["chromium", "geckodriver", "unzipNLS", "wget"]
+
+[unitTest]
+language = "python3"
+
+[gitHubImport]
+requiredFiles = [".replit", "replit.nix"]
+
+[deployment]
+run = ["python3", "main.py"]
+deploymentTarget = "gce"
+
+[[ports]]
+localPort = 8000
+externalPort = 80
+
+[[ports]]
+localPort = 9222
+[workflows]
+runButton = "Run"
+
+[[workflows.workflow]]
+name = "Run"
+author = "manual"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "python3 main.py"
+
+[workflows.workflow.metadata]
+outputType = "console"
+
+[agent]
+expertMode = true
+
