@@ -1139,7 +1139,7 @@ while True:
     else:  #--------------------------------------------------------
         print(command)
         command = command.split()
-        default_response_code = random.randint(0, 3)
+        response = random.randint(0, 3)
 
         x = random.randint(1, 1000000)
         if command[0].lower() == "say" and len(command) >= 2:
@@ -1587,7 +1587,6 @@ while True:
             print("this is the imagenum", imagenum)
             leimages = [Image.open(f"image_{i}.jpg") for i in range(1, imagenum + 1)]
             quotareached=False
-            response = None
             try:
                 response = client.models.generate_content(
                     model="gemini-2.0-flash-preview-image-generation",
@@ -1698,7 +1697,6 @@ while True:
                 print("this is the imagenum", imagenum)
                 leimages = [Image.open(f"image_{i}.jpg") for i in range(1, imagenum + 1)]
                 quotareached=False
-                response = None
                 try:
                     response = client.models.generate_content(
                         model="gemini-2.0-flash-preview-image-generation",
@@ -1802,7 +1800,10 @@ while True:
                 leimages = [Image.open(f"image_{i}.jpg") for i in range(1, imagenum + 1)]
                 userdata = reqs.get(
                     f"https://x-camp.discourse.group/u/{user}.json").json()
-                timezone = userdata["user"]["timezone"]
+                if 'profile_hidden' in userdata["user"] and userdata["user"]["profile_hidden"]==True:
+                    timezone="US/Pacific"
+                else:
+                    timezone = userdata["user"]["timezone"]
                 try:
                     tz = pytz.timezone(timezone)
                 except pytz.UnknownTimeZoneError:
@@ -2165,9 +2166,9 @@ while True:
                         )
         else:
             if chatpm:
-                defaultresponse(default_response_code, chatpm)
+                defaultresponse(response, chatpm)
             else:
-                topiccontent = defaultresponse(default_response_code, chatpm)
+                topiccontent = defaultresponse(response, chatpm)
     if not chatpm:
         print(topiccontent)
         #print("seriously I GOT HERE")

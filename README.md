@@ -82,6 +82,9 @@ Assistance and help: ChatGPT, DeepSeek, Gemini, [ethandacat](https://github.com/
 Also go check out [ethandacat](https://github.com/ethandacat)'s [catscobot](https://github.com/ethandacat/catscobott)!
 ## Changelog:
 ```
+September 25, 2025
+Version 2.2.2: Bug fix, a slight oversight on profiles being hidden.
+
 August 29, 2025
 Version 2.2.1: Quota reach protection. Bug fixes
 
