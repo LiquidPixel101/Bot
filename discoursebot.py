@@ -39,6 +39,7 @@ model = client.chats.create(model="gemini-flash-latest",config=types.GenerateCon
 modelpm = client.chats.create(model="gemini-flash-latest",config=types.GenerateContentConfig(system_instruction=context+"Your responses are limited to 6000 chars."),)
 modelbu = client.chats.create(model="gemini-flash-lite-latest",config=types.GenerateContentConfig(system_instruction=context),)
 modelpmbu = client.chats.create(model="gemini-flash-lite-latest",config=types.GenerateContentConfig(system_instruction=context+"Your responses are limited to 6000 chars."),)
+
 #imagemodel=client.models.get(name="gemini-2.5-flash-image")
 # config = types.GenerateContentConfig(
 #     response_modalities=["TEXT", "IMAGE"]
