@@ -82,6 +82,9 @@ Assistance and help: ChatGPT, DeepSeek, Gemini, [ethandacat](https://github.com/
 Also go check out [ethandacat](https://github.com/ethandacat)'s [catscobot](https://github.com/ethandacat/catscobott)!
 ## Changelog:
 ```
+November 19, 2025
+Version 2.2.3: Upgraded AI model to gemini-flash-latest
+
 September 25, 2025
 Version 2.2.2: Bug fix, a slight oversight on profiles being hidden.
 

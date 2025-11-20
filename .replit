@@ -34,5 +34,5 @@ args = "python3 main.py"
 outputType = "console"
 
 [agent]
-expertMode = true
+expertMode = false
 
