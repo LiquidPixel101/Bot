@@ -95,7 +95,7 @@ August 29, 2025
 Version 2.2.1: Quota reach protection. Bug fixes
 
 August 29, 2025
-Version 2.2.0: Added image to image, text to image, image to text.
+Version 2.2.0 [MAJOR UPDATE!]: Added image to image, text to image, image to text.
 
 August 28, 2025
 Version 2.1.6: Bug fixes and minor tweaks in the code
