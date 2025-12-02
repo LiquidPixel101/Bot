@@ -964,11 +964,14 @@ password = os.environ['PASSWORD']
 #chromedriver_path = "/nix/store/zi4f80l169xlmivz8vja8wlphq74qqk0-chromium-125.0.6422.141/bin/chromium"
 #service = Service(chromedriver_path)
 browser = webdriver.Chrome(options=options)
-browser.get('https://x-camp.discourse.group/')
+browser.get('https://x-camp.discourse.group/login')
 
 # Login
+WebDriverWait(browser, 10).until(
+    ec.element_to_be_clickable((By.XPATH, "//button[./span[text()='with XYD']]"))
+).click()
 WebDriverWait(browser,
-              10).until(ec.presence_of_element_located(
+              20).until(ec.presence_of_element_located(
                   (By.ID, "username"))).send_keys(email)
 WebDriverWait(browser,
               10).until(ec.presence_of_element_located(
@@ -1117,7 +1120,7 @@ while True:
     if (command == "-1"):
         if perm:
             browser.refresh()
-            browser.get('https://x-camp.discourse.group/')
+            browser.get('https://x-camp.discourse.group/login')
             continue
         if chatpm:
             topic_content.send_keys("**[AUTOMATED]**")
@@ -2234,4 +2237,4 @@ while True:
         sys.exit(42)
     time.sleep(0.002)
     browser.refresh()
-    browser.get('https://x-camp.discourse.group/')
+    browser.get('https://x-camp.discourse.group/login')

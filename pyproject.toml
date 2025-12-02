@@ -14,6 +14,7 @@ flask = "^3.1.0"
 pytz = "^2025.2"
 sift-stack-py = "^0.7.0"
 beautifulsoup4 = "^4.13.5"
+waitress = "^3.0.2"
 
 [tool.pyright]
 # https://github.com/microsoft/pyright/blob/main/docs/configuration.md
