@@ -82,6 +82,9 @@ Assistance and help: ChatGPT, DeepSeek, Gemini, [ethandacat](https://github.com/
 Also go check out [ethandacat](https://github.com/ethandacat)'s [catscobot](https://github.com/ethandacat/catscobott)!
 ## Changelog:
 ```
+December 10, 2025
+Version 2.2.5: Fixed login commands again.
+
 December 1, 2025
 Version 2.2.4: Updated the login commands to the most recent version for the X-Camp Discourse, and updated the Flask server to have a Waitress WSGI Server instead of the prototype server.
 
