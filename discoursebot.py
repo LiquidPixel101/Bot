@@ -1923,7 +1923,7 @@ while True:
             iscomic = False
             dontoutput = False
             if len(command) > 1:
-                if command[1] == "last.lower()" or command[1].lower(
+                if command[1].lower() == "last" or command[1].lower(
                 ) == "latest":
                     comicurl = lastdata["img"]
                     xkcdlink = 'https://xkcd.com/' + str(lastcomicid)
