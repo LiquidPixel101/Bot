@@ -66,8 +66,7 @@ The following features may or may not come out in the future. Stay tuned!
 * Autocorrect: An AI decides if there may be a typo in your command and automatically fixes it.
 * @bot image: Uses AI to generate an image.
 * @bot now: Displays the current time and date.
-* Using AI to scan images
-* Self-Destruct: Self destructs. Only restricted people can do this.
+* @bot translate: Translate stuff.
 * More documentation (here)
 
 ## Credits:
