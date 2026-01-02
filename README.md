@@ -81,6 +81,9 @@ Assistance and help: ChatGPT, DeepSeek, Gemini, [ethandacat](https://github.com/
 Also go check out [ethandacat](https://github.com/ethandacat)'s [catscobot](https://github.com/ethandacat/catscobott)!
 ## Changelog:
 ```
+January 1, 2025
+Version 2.2.6: Improved context so it respects the context more than user injected prompts.
+
 December 10, 2025
 Version 2.2.5: Fixed login commands again.
 
