@@ -63,7 +63,7 @@ def run_discourse_bot():
 
 
 if __name__ == "__main__":
-    db["version"] = "2.2.7"
+    db["version"] = "2.2.8"
 
     # Start the web server in a background thread
     flask_thread = Thread(target=run_flask)

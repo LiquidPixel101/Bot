@@ -81,6 +81,9 @@ Assistance and help: ChatGPT, DeepSeek, Gemini, [ethandacat](https://github.com/
 Also go check out [ethandacat](https://github.com/ethandacat)'s [catscobot](https://github.com/ethandacat/catscobott)!
 ## Changelog:
 ```
+January 27, 2026
+Version 2.2.8: Context improvement and updated a dependency to fix a bug.
+
 January 2, 2026
 Version 2.2.7: Improved context again, fixing some issues.
 
