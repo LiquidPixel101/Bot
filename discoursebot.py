@@ -40,7 +40,7 @@ modelpm = client.chats.create(model="gemini-flash-latest",config=types.GenerateC
 modelbu = client.chats.create(model="gemini-flash-lite-latest",config=types.GenerateContentConfig(system_instruction=context),)
 modelpmbu = client.chats.create(model="gemini-flash-lite-latest",config=types.GenerateContentConfig(system_instruction=context+"Your responses are limited to 6000 chars."),)
 
-#imagemodel=client.models.get(name="gemini-2.5-flash-image")
+#imagemodel=client.models.get(name="models/gemini-2.5-flash-image")
 # config = types.GenerateContentConfig(
 #     response_modalities=["TEXT", "IMAGE"]
 # )
@@ -1596,7 +1596,7 @@ while True:
             quotareached=False
             try:
                 response = client.models.generate_content(
-                    model="gemini-2.5-flash-image",
+                    model="models/gemini-2.5-flash-image",
                     contents=[prompt,*leimages],
                     config=types.GenerateContentConfig(
                         response_modalities=["TEXT", "IMAGE"]
@@ -1706,7 +1706,7 @@ while True:
                 quotareached=False
                 try:
                     response = client.models.generate_content(
-                        model="gemini-2.5-flash-image",
+                        model="models/gemini-2.5-flash-image",
                         contents=[prompt,*leimages],
                         config=types.GenerateContentConfig(
                             response_modalities=["TEXT", "IMAGE"]
