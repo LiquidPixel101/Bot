@@ -959,7 +959,7 @@ options.add_argument('--disable-software-rasterizer')
 options.add_argument('--remote-debugging-port=9222')
 options.add_argument('--disable-blink-features=AutomationControlled')
 options.add_argument('--disable-infobars')
-options.add_argument('--window-size=1920,1080')
+#options.add_argument('--window-size=1920,1080')
 options.add_argument('--disable-extensions')
 options.add_argument('--start-maximized')
 email = os.environ['EMAIL']
@@ -974,15 +974,17 @@ browser.get('https://x-camp.discourse.group/')
 # WebDriverWait(browser, 10).until(
 #     ec.element_to_be_clickable((By.XPATH, "//button[./span[text()='with XYD']]"))
 # ).click()
-WebDriverWait(browser,
-              20).until(ec.presence_of_element_located(
-                  (By.ID, "username"))).send_keys(email)
-WebDriverWait(browser,
-              10).until(ec.presence_of_element_located(
-                  (By.ID, "password"))).send_keys(password)
-signin = WebDriverWait(browser, 10).until(
-    ec.element_to_be_clickable((By.CSS_SELECTOR, "button[type='submit']")))
-signin.click()
+# WebDriverWait(browser,
+#               20).until(ec.presence_of_element_located(
+#                   (By.CSS_SELECTOR, "input[aria-label='Email or username']"))).send_keys(email)
+#WebDriverWait(browser, 20).until(ec.presence_of_element_located((By.XPATH, "//button[.//span[text()='Continue →']]"))).click()
+time.sleep(300)
+# WebDriverWait(browser,
+#               1000000).until(ec.presence_of_element_located(
+#                   (By.CSS_SELECTOR, "input.ant-input"))).send_keys(password)
+# signin = WebDriverWait(browser, 10).until(
+#     ec.element_to_be_clickable((By.XPATH, "//button[text()='Sign In']")))
+# signin.click()
 WebDriverWait(browser, 10).until(ec.presence_of_element_located((By.ID, "toggle-current-user")))
 time.sleep(1)
 browser.refresh()

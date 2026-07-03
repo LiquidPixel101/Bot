@@ -2,6 +2,9 @@
 
 # Bot
 
+## ANNOUNCEMENT
+Due to the addition of a CAPTCHA inside of X-Camp's Discourse login, Bot will no longer work. Therefore, it has been deprecated and may not recieve any future updates.
+
 ## About
 Bot is a discourse bot that responds automatically to pings. It automates access to the discourse and was taken inspiration from discobot, a bot native to discourse. It is made in python selenium, using chromedriver. <br>
 There is a bot currently being hosted on replit for the X-Camp Discourse.
